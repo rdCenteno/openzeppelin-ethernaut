@@ -45,3 +45,7 @@ Delegatecall is a low level function similar to call. When contract A executes d
 To solve this problem you have to call the pwn method from Delegate contract, via the fallback function of the Delegation contract. To call the pwn method you from the fallback you have to encode the call `bytes4(sha3("pwn()")`
 
 `await sendTransaction({from: player, to: contract.address, data: "0xdd365b8b0000000000000000000000000000000000000000000000000000000000000000"})`
+
+## Force
+
+A contract cannot refuse funds given by another contract's selfdestruction. Therefore, all we have to do is create a contract, send ether to it, and selfdestruct it in favor of the Force contract.
