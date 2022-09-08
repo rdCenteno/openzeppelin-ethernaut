@@ -59,3 +59,11 @@ All the information in the blockchain is public, if a variable is private it onl
 `await web3.eth.getStorageAt(contract.address, 1);`
 
 To ensure that data is private, it needs to be encrypted before being put onto the blockchain. In this scenario, the decryption key should never be sent on-chain, as it will then be visible to anyone who looks for it. zk-SNARKs provide a way to determine whether someone possesses a secret parameter, without ever having to reveal the parameter.
+
+## King
+
+You have to claim the kingdom by setting the higher bet. To solve this problem you have to deploy other contract with no fallback function, or just put a fallback function with a reject message.
+
+From the hack contact call the King contract and become king.
+ 
+`(bool success,) = _to.call{value:msg.value}(new bytes(0));`
