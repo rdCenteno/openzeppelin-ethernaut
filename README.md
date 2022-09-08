@@ -37,3 +37,11 @@ tx.origin and msg.sender should be different, to achieve this you can call the c
 ## Token
 
 The smart contrac has an overflow vulnerability in every math operation, to solve this problem just call the transfer method (from other account) and send it to your main account.
+
+## Delegatecall
+
+Delegatecall is a low level function similar to call. When contract A executes delegatecall to contract , B's code is executed with contract A's storage, msg.sender and msg.value. IMPORTANT: IN B CONTRACT STORAGE LAYOUT MUST BE THE SAME AS CONTRACT A
+
+To solve this problem you have to call the pwn method from Delegate contract, via the fallback function of the Delegation contract. To call the pwn method you from the fallback you have to encode the call `bytes4(sha3("pwn()")`
+
+`await sendTransaction({from: player, to: contract.address, data: "0xdd365b8b0000000000000000000000000000000000000000000000000000000000000000"})`
