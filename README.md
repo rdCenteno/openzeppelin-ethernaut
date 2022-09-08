@@ -33,3 +33,7 @@ Create a contract that calls the CoinFlip contract, this contract uses the same 
 ## Telephone
 
 tx.origin and msg.sender should be different, to achieve this you can call the changeOwner method via another smart contract. This way the tx.origin(smar contract address) and msg.sender(user address) are not the same.
+
+## Token
+
+The smart contrac has an overflow vulnerability in every math operation, to solve this problem just call the transfer method (from other account) and send it to your main account.
