@@ -49,3 +49,13 @@ To solve this problem you have to call the pwn method from Delegate contract, vi
 ## Force
 
 A contract cannot refuse funds given by another contract's selfdestruction. Therefore, all we have to do is create a contract, send ether to it, and selfdestruct it in favor of the Force contract.
+
+In solidity, for a contract to be able to receive ether, the fallback function must be marked payable.
+
+## Vault
+
+All the information in the blockchain is public, if a variable is private it only indicates that it only can be acceded from the current contract, others contracts cannot read that information. But knowing how the EVM storage works you can access that information from outside the blockchain.
+
+`await web3.eth.getStorageAt(contract.address, 1);`
+
+To ensure that data is private, it needs to be encrypted before being put onto the blockchain. In this scenario, the decryption key should never be sent on-chain, as it will then be visible to anyone who looks for it. zk-SNARKs provide a way to determine whether someone possesses a secret parameter, without ever having to reveal the parameter.
