@@ -74,3 +74,14 @@ To solve this problem, you have to retreive all the balance from the contract.
 As the balance deduction is made after the call msg.sender.call.value(_amount)() If the msg.sender is a contract, it will call the fallback function.
 Therefore, if this code is called in the fallback function of the sender, it will cause a recursion, sending the value multiple times before reducing the sender's balance.
 Important to star the recursion sending the smart contract the total balance of Reentrance contract.
+
+Important: Transfer and send are no longer recommended solutions as they can potentially break contracts after the Istanbul hard fork
+
+Important: Always assume that the receiver of the funds you are sending can be another contract, not just a regular address. Hence, it can execute code in its payable fallback method and re-enter your contract, possibly messing up your state/logic.
+
+## Elevator
+
+Sol in order to set top to true, the first call to isLastFloor has to return false and the second one, true.
+
+You can use the view function modifier on an interface in order to prevent state modifications. The pure modifier also prevents functions
+from modifying the state.
