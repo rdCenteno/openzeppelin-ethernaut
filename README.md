@@ -67,3 +67,10 @@ You have to claim the kingdom by setting the higher bet. To solve this problem y
 From the hack contact call the King contract and become king.
  
 `(bool success,) = _to.call{value:msg.value}(new bytes(0));`
+
+## Reentrancy
+
+To solve this problem, you have to retreive all the balance from the contract. 
+As the balance deduction is made after the call msg.sender.call.value(_amount)() If the msg.sender is a contract, it will call the fallback function.
+Therefore, if this code is called in the fallback function of the sender, it will cause a recursion, sending the value multiple times before reducing the sender's balance.
+Important to star the recursion sending the smart contract the total balance of Reentrance contract.
