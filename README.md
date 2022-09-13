@@ -85,3 +85,30 @@ Sol in order to set top to true, the first call to isLastFloor has to return fal
 
 You can use the view function modifier on an interface in order to prevent state modifications. The pure modifier also prevents functions
 from modifying the state.
+
+# Sending Ether (transfer, send, call)
+
+Send ether to other contract or address. You can send ether to other contract or address by:
+
+`transfer` (2300 gas, throw error)
+`send` (2300 gas, returns bool)
+`call` (foward all gas or set gas, returns bool)
+
+To receive ether. A contract must implement at least one of this methods:
+
+`receive() external payable {}`
+`fallback() external payable {}`
+
+receive is called if msg.data is empty (""), otherwise fallback method is called.
+
+# Guard against Re-entrancy
+
+To send ether the recommended is to use call method in combination with re-entrancy guard
+
+Guard against re-entrancy by:
+
+- Making all state changes before calling other contracts
+- Using re-entrancy guard modifier
+
+`(bool sent, bytes memory data) = to.call{ value: msg.value}("")`
+`require(sent, "Failed to send Ether")`
