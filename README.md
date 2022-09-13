@@ -112,3 +112,13 @@ Guard against re-entrancy by:
 
 `(bool sent, bytes memory data) = to.call{ value: msg.value}("")`
 `require(sent, "Failed to send Ether")`
+
+# Function selector
+
+When a function is called, the fist 4 bytes of calldata specifies which function to call. This 4 bytes are called a function selector.
+
+`addressExample.call(abi.encodeWithSignature("methodName(address, uint))", 0xcontract.address, 2000))`
+
+The first 4 bytes returned from abi.encodeWithSignature(....) is the function selector.
+
+This low-level call are not recommended.
