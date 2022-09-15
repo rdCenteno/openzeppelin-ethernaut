@@ -86,6 +86,27 @@ Sol in order to set top to true, the first call to isLastFloor has to return fal
 You can use the view function modifier on an interface in order to prevent state modifications. The pure modifier also prevents functions
 from modifying the state.
 
+## Privacy
+
+Important to take into account the next info about EVM storage:
+
+By default, all state variables in Solidity are stored in storage. This means that all variables that are declared outside of a function, are saved by the EVM. → There is one exception, which is, when you declare it as “constant” or “immutable”. When you declare a variable as constant or immutable, it does not occupy a slot, they are directly compiled.
+
+Each slot has a length of 32 bytes (32 bytes == 256 bits == 64 hex (or nibble))
+
+The variables are stored in order from 0 to n (n = maximum capacity). In the case that a variable exceeds the space for that
+particular slot, it will be passed to the next slot.
+
+Multiple variables can be stored under a single slot if they fit.
+
+Struct creates a new slot, the elements of the struct behave the same way as described above.
+
+Fixed size array creates a new slot.
+
+Dynamic arrays create a slot per element.
+
+Mappings are stored at hash(key, slot)
+
 # Sending Ether (transfer, send, call)
 
 Send ether to other contract or address. You can send ether to other contract or address by:
